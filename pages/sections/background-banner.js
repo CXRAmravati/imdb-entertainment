@@ -1,16 +1,15 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import { Pagination, EffectFade, Autoplay } from "swiper";
+import BannerPoster from "components/banner-poster.component";
+import { useQuery } from "react-query";
+import { getTrendingMovies } from "services";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
+import "swiper/css/effect-fade";
 // import required modules
-import { Pagination } from "swiper";
-import BannerPoster from "components/banner-poster.component";
-import { useQuery } from "react-query";
-import { getTrendingMovies } from "services";
 
 export default function MoviePageBackgroundBanner() {
   const movieBanners = useQuery("bannerData", () => getTrendingMovies());
@@ -27,14 +26,22 @@ export default function MoviePageBackgroundBanner() {
         pagination={{
           clickable: true,
         }}
-        modules={[Pagination]}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        effect={"fade"}
+        modules={[Pagination, EffectFade, Autoplay]}
         className="mySlider"
       >
         {backBanners.map((movie, index) => {
           return (
             <>
               <SwiperSlide key={index}>
-                <BannerPoster imagePath={movie.backdrop_path} />
+                <BannerPoster
+                  imagePath={movie.backdrop_path}
+                  movieInfo={movie.overview}
+                />
               </SwiperSlide>
             </>
           );

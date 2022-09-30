@@ -8,3 +8,20 @@
   justify-content: space-between;
   flex-wrap: wrap;
 }
+.mySlider {
+  max-width: 1920px;
+}
+
+.swiper-pagination {
+  color: red;
+}
+
+.banner-poster {
+  .movie-info {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    color: white;
+    max-width: 600px;
+  }
+}

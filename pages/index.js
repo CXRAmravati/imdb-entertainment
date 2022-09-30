@@ -8,7 +8,9 @@ export default function MoviePage() {
     <div className="movie-list">
       <MoviePageHeader />
       <MoviePageBackgroundBanner />
-      <div className="trending-movies">{/* <MovieCard /> */}</div>
+      <div className="trending-movies">
+        <MovieCard />
+      </div>
     </div>
   );
 }
