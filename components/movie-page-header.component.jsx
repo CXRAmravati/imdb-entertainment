@@ -4,6 +4,7 @@ export default function MoviePageHeader() {
     return (
         <nav className="navbar navbar-expand-lg navbar-light navbar-nav sticky-top bg-dark justify-content-between">
 
+            <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
             <div className="collapse navbar-collapse nav-justified" id="navbarNavDropdown">
                 <ul className="navbar-nav gap-12">
                     <li className="nav-item  active">
