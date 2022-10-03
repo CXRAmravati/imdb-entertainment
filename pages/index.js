@@ -5,7 +5,7 @@ import MovieCard from "components/movie-card.component";
 import MoviePageBackgroundBanner from "./sections/background-banner";
 export default function MoviePage() {
   return (
-    <div className="movie-list">
+    <div className="movie-show-page">
       <MoviePageHeader />
       <MoviePageBackgroundBanner />
       <div className="trending-movies">

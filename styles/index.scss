@@ -1,27 +1,46 @@
-.movie-width {
-  max-width: 550px;
-}
+.movie-show-page {
+  background-color: #333333;
+  .movie-width {
+    max-width: 550px;
+  }
 
-.trending-movies {
-  padding: 100px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-.mySlider {
-  max-width: 1920px;
-}
+  .trending-movies {
+    padding: 100px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .mySlider {
+    max-width: 1920px;
+  }
 
-.swiper-pagination {
-  color: red;
-}
+  .banner-poster {
+    .banner-info {
+      padding: 0 70px;
+      position: absolute;
+      top: 0;
+      z-index: 1;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      background-color: #0009;
 
-.banner-poster {
-  .movie-info {
-    position: absolute;
-    top: 0;
-    z-index: 1;
-    color: white;
-    max-width: 600px;
+      justify-content: center;
+      height: 100%;
+
+      .banner-title {
+        color: white;
+      }
+      .banner-movie-info {
+        max-width: 1200px;
+
+        font-size: 20px;
+      }
+      .banner-movie-type-list {
+        display: flex;
+        gap: 10px;
+      }
+    }
   }
 }

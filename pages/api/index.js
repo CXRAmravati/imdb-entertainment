@@ -20,3 +20,6 @@ async function executeHttpRequest(url, options = { method: "GET" }) {
 export const getTrendingMovies = () => {
   return executeHttpRequest(`/trending/all/day`);
 };
+export const getAllGerners = () => {
+  return executeHttpRequest(`/genre/movie/list`);
+};

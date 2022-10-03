@@ -2,14 +2,14 @@ import dayjs from "dayjs";
 import Image from "next/image";
 import React from "react";
 import { useQuery } from "react-query";
-import { getTrendingMovies } from "services/index";
+import { getTrendingMovies } from "pages/api/index";
 function MovieCard() {
 
     const trendingMovies = useQuery(["trending"], () => getTrendingMovies());
     const movieData = trendingMovies.isSuccess ? trendingMovies.data.results : [];
 
     const imagePath = "https://image.tmdb.org/t/p/w500";
-    console.log("movie data", movieData);
+    // console.log("movie data", movieData);
 
     return (
         <>

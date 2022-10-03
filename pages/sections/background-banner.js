@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, EffectFade, Autoplay } from "swiper";
 import BannerPoster from "components/banner-poster.component";
 import { useQuery } from "react-query";
-import { getTrendingMovies } from "services";
+import { getTrendingMovies } from "pages/api";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -16,7 +16,7 @@ export default function MoviePageBackgroundBanner() {
 
   const backBanners = movieBanners.isSuccess ? movieBanners.data.results : [];
 
-  console.log("Data", backBanners);
+  // console.log("Data", backBanners);
   return (
     <>
       <Swiper
@@ -27,7 +27,7 @@ export default function MoviePageBackgroundBanner() {
           clickable: true,
         }}
         autoplay={{
-          delay: 2500,
+          delay: 4000,
           disableOnInteraction: false,
         }}
         effect={"fade"}
@@ -41,6 +41,9 @@ export default function MoviePageBackgroundBanner() {
                 <BannerPoster
                   imagePath={movie.backdrop_path}
                   movieInfo={movie.overview}
+                  title={movie.original_title || movie.name}
+                  rating={movie.vote_average}
+                  genresIds={movie.genre_ids}
                 />
               </SwiperSlide>
             </>
