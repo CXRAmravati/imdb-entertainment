@@ -3,13 +3,54 @@
   .movie-width {
     max-width: 550px;
   }
+  .now-in-theater {
+    // padding: 100px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 90px;
+    .title {
+      color: white;
+    }
+    hr{
+      width: 1190px;
+    }
+    .main-card-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 50px;
+      justify-content: center;
+      align-items: center;
+      max-width: 1190px;
 
+      .card-wrapper {
+        // display: flex;
+        // padding: 50px;
+        // justify-content: space-between;
+        // flex-wrap: wrap;
+        .movie-name {
+          color: white;
+        }
+        .genre {
+          color: white;
+        }
+        h4 {
+          color: white;
+          font-size: 14px;
+          text-align: center;
+        }
+      }
+    }
+  }
   .trending-movies {
     padding: 100px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
   }
+
   .mySlider {
     max-width: 1920px;
   }

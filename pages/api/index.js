@@ -23,3 +23,24 @@ export const getTrendingMovies = () => {
 export const getAllGerners = () => {
   return executeHttpRequest(`/genre/movie/list`);
 };
+export const getNowInTheatreMovies = () => {
+  return executeHttpRequest(`/movie/now_playing`);
+};
+export const getUpComingMovies = () => {
+  return executeHttpRequest(`/movie/upcoming`);
+};
+export const getPopularMovies = () => {
+  return executeHttpRequest(`/movie/popular`);
+};
+export const getTopRatedMovies = () => {
+  return executeHttpRequest(`/movie/top_rated`);
+};
+export const getTVPopular = () => {
+  return executeHttpRequest(`/tv/popular`);
+};
+export const getTVTodayAiring = () => {
+  return executeHttpRequest(`/tv/airing_today`);
+};
+export const getTVTopRated = () => {
+  return executeHttpRequest(`/tv/top_rated`);
+};
