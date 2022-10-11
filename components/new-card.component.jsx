@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { useQuery } from "react-query";
+import { useRouter } from "next/router";
 import {
   getNowInTheatreMovies,
   getAllGerners,
@@ -11,11 +12,14 @@ import {
   getTVTodayAiring,
   getTVTopRated,
 } from "pages/api/index";
+import { Router } from "next/router";
 
-function NewMovieCard({ movie }) {
-  console.log("ss", movie);
+function NewMovieCard({ movie, data }) {
+  // console.log("ss", data);
+  const router = useRouter();
   const imagePath = "https://image.tmdb.org/t/p/w500";
   const movieGeners = useQuery("genersData", () => getAllGerners());
+
   const genersList = movieGeners.isSuccess ? movieGeners.data.genres : [];
   let movieCategory = [];
   if (movie === "newIn") {
@@ -30,18 +34,12 @@ function NewMovieCard({ movie }) {
     movieCategory = useQuery("tvpopular", () => getTVPopular());
   } else if (movie === "tvtoday") {
     movieCategory = useQuery("tvtoday", () => getTVTodayAiring());
-  }
-  else if (movie === "tvtop") {
+  } else if (movie === "tvtop") {
     movieCategory = useQuery("tvtop", () => getTVTopRated());
   }
 
   const movieData = movieCategory.isSuccess ? movieCategory.data.results : [];
-
-  // else if(movie===upComing)
-  // {
-  //   const up=useQuery(['upcoming'],()=>getUpComingMovies())
-  //   const movieData=up.isSuccess?up.data.results:[];
-  // }
+  console.log("mo", movieData);
 
   let genName = [];
 
@@ -53,7 +51,12 @@ function NewMovieCard({ movie }) {
         {movieData.map((item, index) => {
           return (
             <div className="card-wrapper">
-              <div className="card-img">
+              <div
+                className="card-img"
+                onClick={() => {
+                  router.push(`/movies/${item.id}`);
+                }}
+              >
                 <Image
                   src={imagePath + item.poster_path}
                   width={227}
@@ -61,7 +64,9 @@ function NewMovieCard({ movie }) {
                 />
               </div>
               <div>
-                <h4 className="movie-name">{item.original_title}</h4>
+                <h4 className="movie-name">
+                  {item.title ? item.title : item.name}
+                </h4>
 
                 <span className="genre">
                   {" "}
@@ -72,9 +77,6 @@ function NewMovieCard({ movie }) {
                           genName.push(element.name);
                         }
                       }
-                      //  Array.isArray(genName)&&genName.map((i)=>{
-                      //   return<span className="genre">{i}</span>
-                      //  })
                     }))
                   }
                 </span>
@@ -86,5 +88,32 @@ function NewMovieCard({ movie }) {
     </>
   );
 }
+
+// export async function getServerSideProps() {
+//   const mydata = getAllGerners();
+//   console.log("hhdd", mydata);
+
+//   const queryClient = new QueryClient();
+
+//   let isError = false;
+
+//   try {
+//     await queryClient.fetchQuery(['genersData'], getAllGerners);
+//     await queryClient.fetchQuery(['theatre'],getNowInTheatreMovies)
+//     await queryClient.fetchQuery(['upComing'],getUpComingMovies)
+//     await queryClient.fetchQuery(['popular'],getPopularMovies)
+//     await queryClient.fetchQuery(['top'],getTopRatedMovies)
+//     await queryClient.fetchQuery(['tvpopular'],getTVPopular)
+//     await queryClient.fetchQuery(['tvtoday'],getTVTodayAiring)
+//     await queryClient.fetchQuery(['tvtop'],getTVTopRated)
+
+//   } catch (error) {
+//     isError = true;
+//     ctx.res.statusCode = error.response.status;
+//   }
+//   return {
+//     props: { dehydratedState: dehydrate(queryClient) }, // will be passed to the page component as props
+//   };
+// }
 
 export default NewMovieCard;

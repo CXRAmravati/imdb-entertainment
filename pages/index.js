@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import MoviePageHeader from "components/movie-page-header.component";
-import MovieCard from "components/movie-card.component";
+// import MovieCard from "components/movie-card.component";
 import MoviePageBackgroundBanner from "./sections/background-banner";
 import NewMovieCard from "components/new-card.component";
 export default function MoviePage() {

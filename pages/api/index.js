@@ -44,3 +44,6 @@ export const getTVTodayAiring = () => {
 export const getTVTopRated = () => {
   return executeHttpRequest(`/tv/top_rated`);
 };
+export const getMovieDetail = (id) => {
+  return executeHttpRequest(`/movie/${id}`);
+};
