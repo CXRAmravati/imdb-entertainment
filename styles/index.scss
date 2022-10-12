@@ -14,7 +14,7 @@
     .title {
       color: white;
     }
-    hr{
+    hr {
       width: 1190px;
     }
     .main-card-wrapper {
@@ -83,6 +83,86 @@
       .banner-movie-type-list {
         display: flex;
         gap: 10px;
+      }
+    }
+  }
+  //for id pagee
+  .movie-detail {
+    padding: 80px;
+    .sub-info {
+      display: flex;
+      justify-content: space-around;
+      color: white;
+      padding-top: 40px;
+      .sub-info-left {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        .title {
+          h1 {
+            margin: 0px;
+          }
+        }
+      }
+      .sub-info-right {
+        display: flex;
+        gap: 50px;
+        .section {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          h4,
+          h3 {
+            margin: 0px;
+          }
+        }
+      }
+    }
+    .extra-info {
+      padding-top: 40px;
+      display: flex;
+      color: white;
+      gap: 60px;
+      .extra-middle {
+        .movie-over {
+          max-width: 290px;
+        }
+      }
+      .extra-right {
+        .back-img {
+          position: relative;
+          .play-btn {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+          }
+        }
+      }
+    }
+    .video-info {
+      color: white;
+      .video-table {
+        display: flex;
+        justify-content: space-around;
+        .video-left {
+          h4{
+            margin:0px;
+          }
+        }
+        .video-right {
+          display: flex;
+          gap: 90px;
+        }
+      }
+      .video-table-info{
+        display: flex;
+        flex-direction: column;
+        .video-left{
+          .videoname{
+            font-size: 12px;
+            max-width: 100px;
+          }
+        }
       }
     }
   }

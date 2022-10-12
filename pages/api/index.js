@@ -47,3 +47,9 @@ export const getTVTopRated = () => {
 export const getMovieDetail = (id) => {
   return executeHttpRequest(`/movie/${id}`);
 };
+export const getMovieCastCrew = (id) => {
+  return executeHttpRequest(`/movie/${id}/credits`);
+};
+export const getMovieVideos = (id) => {
+  return executeHttpRequest(`/movie/${id}/videos`);
+};

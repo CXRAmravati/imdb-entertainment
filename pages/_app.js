@@ -7,7 +7,6 @@ function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
-       
       <Component {...pageProps} />
       </Hydrate>
     </QueryClientProvider>
