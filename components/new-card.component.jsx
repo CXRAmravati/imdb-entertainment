@@ -89,31 +89,31 @@ function NewMovieCard({ movie, data }) {
   );
 }
 
-export async function getServerSideProps() {
-  const mydata = getAllGerners();
-  console.log("hhdd", mydata);
+// export async function getServerSideProps() {
+//   const mydata = getAllGerners();
+//   console.log("hhdd", mydata);
 
-  const queryClient = new QueryClient();
+//   const queryClient = new QueryClient();
 
-  let isError = false;
+//   let isError = false;
 
-  try {
-    await queryClient.fetchQuery(['genersData'], getAllGerners);
-    await queryClient.fetchQuery(['theatre'],getNowInTheatreMovies)
-    await queryClient.fetchQuery(['upComing'],getUpComingMovies)
-    await queryClient.fetchQuery(['popular'],getPopularMovies)
-    await queryClient.fetchQuery(['top'],getTopRatedMovies)
-    await queryClient.fetchQuery(['tvpopular'],getTVPopular)
-    await queryClient.fetchQuery(['tvtoday'],getTVTodayAiring)
-    await queryClient.fetchQuery(['tvtop'],getTVTopRated)
+//   try {
+//     await queryClient.fetchQuery(['genersData'], getAllGerners);
+//     await queryClient.fetchQuery(['theatre'],getNowInTheatreMovies)
+//     await queryClient.fetchQuery(['upComing'],getUpComingMovies)
+//     await queryClient.fetchQuery(['popular'],getPopularMovies)
+//     await queryClient.fetchQuery(['top'],getTopRatedMovies)
+//     await queryClient.fetchQuery(['tvpopular'],getTVPopular)
+//     await queryClient.fetchQuery(['tvtoday'],getTVTodayAiring)
+//     await queryClient.fetchQuery(['tvtop'],getTVTopRated)
 
-  } catch (error) {
-    isError = true;
-    // ctx.res.statusCode = error.response.status;
-  }
-  return {
-    props: { dehydratedState: dehydrate(queryClient) }, // will be passed to the page component as props
-  };
-}
+//   } catch (error) {
+//     isError = true;
+//     // ctx.res.statusCode = error.response.status;
+//   }
+//   return {
+//     props: { dehydratedState: dehydrate(queryClient) }, // will be passed to the page component as props
+//   };
+// }
 
 export default NewMovieCard;
