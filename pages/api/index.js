@@ -53,3 +53,6 @@ export const getMovieCastCrew = (id) => {
 export const getMovieVideos = (id) => {
   return executeHttpRequest(`/movie/${id}/videos`);
 };
+export const getMovieImages = (id) => {
+  return executeHttpRequest(`/movie/${id}/images`);
+};

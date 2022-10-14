@@ -1,14 +1,22 @@
 import BannerPoster from "components/banner-poster.component";
 import { Router, useRouter } from "next/router";
-import { getMovieCastCrew, getMovieDetail, getMovieVideos } from "pages/api";
+import {
+  getMovieCastCrew,
+  getMovieDetail,
+  getMovieImages,
+  getMovieVideos,
+} from "pages/api";
 import React, { useState } from "react";
 import { QueryClient, useQuery } from "react-query";
 import Image from "next/image";
 import PlayButton from "components/playArrow.component";
+import CastComponent from "components/cast.component";
+import ImageComponent from "components/Images.componet";
 
 function MovieDetail() {
   const router = useRouter();
   const [shown, setShown] = useState(false);
+  const [tabImage, setTabImage] = useState(false);
   const [videoKey, setVideoKey] = useState("");
   const id = router.query.id;
   console.log("id is", id);
@@ -17,14 +25,17 @@ function MovieDetail() {
   );
   const movieCastQuery = useQuery(["cast", id], () => getMovieCastCrew(id));
   const movieVideoQuery = useQuery(["video", id], () => getMovieVideos(id));
-  // console.log("gg", movieVideoQuery.data.results);
+  const movieImagesQuery = useQuery(["movieImage", id], () => getMovieImages(id));
+
+  console.log("gg", movieImagesQuery.data);
   let key = movieVideoQuery.isSuccess
     ? movieVideoQuery.data.results[0].key
     : "";
-  console.log("asas", key);
 
   const crewInfo = movieCastQuery.isSuccess ? movieCastQuery.data.crew : [];
   const castInfo = movieCastQuery.isSuccess ? movieCastQuery.data.cast : [];
+  const movieImages = movieImagesQuery.isSuccess ? movieImagesQuery.data : [];
+  console.log("image",movieImages)
 
   const movieInfo = movieDetailQuery.isSuccess ? movieDetailQuery.data : [];
 
@@ -52,6 +63,9 @@ function MovieDetail() {
           width="70%"
           src={`https://www.youtube.com/embed/${videoKey}`}
         />
+        {/* <video width="320" height="240" controls autoPlay>
+          <source src={`https://www.youtube.com/watch?v=${videoKey}`}type="video/mp4" />
+        </video> */}
       </div>
     );
   };
@@ -67,16 +81,25 @@ function MovieDetail() {
               movieVideoQuery.data.results.map((item, index) => {
                 return (
                   <div className="video-compo">
-                  <Image src={bannerImage} height={200} width={250}  onClick={()=>{
-                     setShown(true);
-                     setVideoKey(item.key);
-                  }}/>
-                  <span className="trailer-name"  onClick={()=>{
-                     setShown(true);
-                     setVideoKey(item.key);
-                  }}>{item.name}</span>
+                    <Image
+                      src={bannerImage}
+                      height={200}
+                      width={250}
+                      onClick={() => {
+                        setShown(true);
+                        setVideoKey(item.key);
+                      }}
+                    />
+                    <span
+                      className="trailer-name"
+                      onClick={() => {
+                        setShown(true);
+                        setVideoKey(item.key);
+                      }}
+                    >
+                      {item.name}
+                    </span>
                   </div>
-                  
                 );
               })}
           </div>
@@ -164,7 +187,6 @@ function MovieDetail() {
                 </div>
               </div>
               <div className="extra-right">
-              
                 <iframe
                   width="650"
                   height="600"
@@ -205,23 +227,10 @@ function MovieDetail() {
                             <span className="play-img">
                               <img src="/youtube.png" />
                               <PlayButton
-                                onClick={
-                                  () => {
-                                    setShown(true);
-                                    setVideoKey(item.key);
-                                  }
-
-                                  // <iframe
-                                  //   width="650"
-                                  //   height="600"
-                                  //   src={`https://www.youtube.com/embed/${item.key}`}
-                                  //   frameBorder="0"
-                                  //   style={{width:"100%", height:"100%"}}
-                                  //   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                  //   allowFullScreen
-                                  //   title="Embedded youtube"
-                                  // />
-                                }
+                                onClick={() => {
+                                  setShown(true);
+                                  setVideoKey(item.key);
+                                }}
                               />
                             </span>
 
@@ -238,7 +247,25 @@ function MovieDetail() {
                   })}
               </div>
             </div>
+            <hr style={{ opacity: "0.5" }} />
           </div>
+          
+          <div className="box-wrapper">
+              <div className="cast-btn" onClick={() => setTabImage(false)}>Cast</div>
+              <div className="img-btn" onClick={() => setTabImage(true)}>Images</div>
+              </div>
+            <div className="outer-line">
+              <div className="inner-line">
+
+              </div>
+            </div>
+
+            {tabImage ? (
+              <ImageComponent images={movieImages} />
+            ) : (
+              <CastComponent cast={castInfo} />
+            )}
+        
         </div>
       )}
     </>
