@@ -1,15 +1,16 @@
 .cast{
     color :white;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    // justify-content: center;
+    // align-items: center;
     table {
         font-family: arial, sans-serif;
         border-collapse: collapse;
         width: 100%;
+        text-align: center;
         td, th {
             // border: 1px solid #dddddd;
-            text-align: center;
+            // text-align: center;
             padding: 8px;
           }
           tr:nth-child(even) {

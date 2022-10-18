@@ -5,15 +5,22 @@ import { useQuery } from "react-query";
 import Image from "next/image";
 
 function ImageComponent({ images }) {
-    console.log("asa",images)
-    const bannerImage =
-    "https://image.tmdb.org/t/p/original" + images.poster_path;
+  console.log("asa", images.posters);
+  const bannerImage = "https://image.tmdb.org/t/p/original";
   return (
     <div className="images">
-        <div className="cast-image">
-<Image src=""/>
-        </div>
-    
+      {images.posters &&
+        images.backdrops.map((item, index) => {
+          return (
+            <div className="cast-image">
+              <Image
+                src={bannerImage + item.file_path}
+                width={400}
+                height={250}
+              />
+            </div>
+          );
+        })}
     </div>
   );
 }

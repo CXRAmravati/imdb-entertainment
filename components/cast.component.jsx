@@ -5,18 +5,24 @@ import { useQuery } from "react-query";
 import Image from "next/image";
 
 function CastComponent({ cast }) {
-  const bannerImage = "https://image.tmdb.org/t/p/original/" + cast.profile_path;
-  
+  console.log("cast iss", cast);
+  const bannerImage = "https://image.tmdb.org/t/p/original/";
+
   return (
     <div className="cast">
       <table>
-       
         {cast.map((item, index) => {
-          console.log(cast.name)
+          // console.log(cast.name);
           return (
             <tr>
               <td>
-                <Image src={bannerImage} width={50} height={50} />
+                {item.profile_path ? (
+                  <Image
+                    src={bannerImage + item.profile_path}
+                    width={70}
+                    height={70}
+                  />
+                ):<span>Unavailable</span>}
               </td>
               <td>{item.name}</td>
               <td>{item.character}</td>

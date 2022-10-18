@@ -1,0 +1,32 @@
+.credit-wrapper {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .credit {
+    padding: 20px;
+    font-size: 20px;
+    border: 1px solid;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .down-arrow {
+    transform: rotate(93deg);
+  }
+}
+.down-list {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+  gap: 10px;
+  visibility: hidden;
+  /* justify-content: space-around; */
+  color: white;
+  .credit-row {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-evenly; */
+    gap: 315px;
+  }
+}

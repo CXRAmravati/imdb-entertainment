@@ -19,15 +19,17 @@ function MovieDetail() {
   const [tabImage, setTabImage] = useState(false);
   const [videoKey, setVideoKey] = useState("");
   const id = router.query.id;
-  console.log("id is", id);
+
   const movieDetailQuery = useQuery(["movieDetail", id], () =>
     getMovieDetail(id)
   );
   const movieCastQuery = useQuery(["cast", id], () => getMovieCastCrew(id));
   const movieVideoQuery = useQuery(["video", id], () => getMovieVideos(id));
-  const movieImagesQuery = useQuery(["movieImage", id], () => getMovieImages(id));
+  const movieImagesQuery = useQuery(["movieImage", id], () =>
+    getMovieImages(id)
+  );
 
-  console.log("gg", movieImagesQuery.data);
+  // console.log("gg", movieImagesQuery.data.posters);
   let key = movieVideoQuery.isSuccess
     ? movieVideoQuery.data.results[0].key
     : "";
@@ -35,7 +37,7 @@ function MovieDetail() {
   const crewInfo = movieCastQuery.isSuccess ? movieCastQuery.data.crew : [];
   const castInfo = movieCastQuery.isSuccess ? movieCastQuery.data.cast : [];
   const movieImages = movieImagesQuery.isSuccess ? movieImagesQuery.data : [];
-  console.log("image",movieImages)
+  // console.log("image",movieImages)
 
   const movieInfo = movieDetailQuery.isSuccess ? movieDetailQuery.data : [];
 
@@ -249,23 +251,35 @@ function MovieDetail() {
             </div>
             <hr style={{ opacity: "0.5" }} />
           </div>
-          
+
           <div className="box-wrapper">
-              <div className="cast-btn" onClick={() => setTabImage(false)}>Cast</div>
-              <div className="img-btn" onClick={() => setTabImage(true)}>Images</div>
-              </div>
-            <div className="outer-line">
-              <div className="inner-line">
-
-              </div>
+            <div className="cast-btn" onClick={() => setTabImage(false)}>
+              Cast
             </div>
+            <div className="img-btn" onClick={() => setTabImage(true)}>
+              Images
+            </div>
+          </div>
+          <div className="outer-line">
+            <div className="inner-line"></div>
+          </div>
 
-            {tabImage ? (
-              <ImageComponent images={movieImages} />
-            ) : (
-              <CastComponent cast={castInfo} />
-            )}
-        
+          {tabImage ? (
+            <ImageComponent images={movieImages} />
+          ) : (
+            <CastComponent cast={castInfo} />
+          )}
+          <div className="full-credit">
+            <span
+              onClick={() => {
+                router.push({pathname:`/movies/full-credits`,
+                query:{"id":id}
+              });
+              }}
+            >
+              See Full Credits
+            </span>
+          </div>
         </div>
       )}
     </>

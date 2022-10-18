@@ -1,4 +1,8 @@
-.images{
-
-
+.images {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1680px;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
 }
