@@ -13,6 +13,7 @@ import PlayButton from "components/playArrow.component";
 import CastComponent from "components/cast.component";
 import ImageComponent from "components/Images.componet";
 import Credit from "components/credit.component";
+import MoviePageHeader from "components/movie-page-header.component";
 
 function FullCredits() {
   const router = useRouter();
@@ -40,6 +41,7 @@ function FullCredits() {
   return (
     <>
       <div className="movie-show-page">
+      <MoviePageHeader />
         {movieDetailQuery.isLoading ? <p>Loading...</p> : null}
         <Image src={bannerImage} width={1920} height={780} alt="banner image" />
         <div className="movie-detail">

@@ -66,10 +66,6 @@ export default function MoviePage() {
         <NewMovieCard movie="tvtop" />
       </div>
       
-      
-      {/* <div className="trending-movies">
-        <MovieCard />
-      </div> */}
     </div>
   );
 }

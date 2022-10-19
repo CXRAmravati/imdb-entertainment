@@ -5,6 +5,7 @@ import {
   getMovieDetail,
   getMovieImages,
   getMovieVideos,
+  getSimilarMovies,
 } from "pages/api";
 import React, { useState } from "react";
 import { QueryClient, useQuery } from "react-query";
@@ -12,6 +13,7 @@ import Image from "next/image";
 import PlayButton from "components/playArrow.component";
 import CastComponent from "components/cast.component";
 import ImageComponent from "components/Images.componet";
+import MoviePageHeader from "components/movie-page-header.component";
 
 function MovieDetail() {
   const router = useRouter();
@@ -28,6 +30,9 @@ function MovieDetail() {
   const movieImagesQuery = useQuery(["movieImage", id], () =>
     getMovieImages(id)
   );
+  const similarMovieQuery = useQuery(["similar", id], () =>
+    getSimilarMovies(id)
+  );
 
   // console.log("gg", movieImagesQuery.data.posters);
   let key = movieVideoQuery.isSuccess
@@ -37,7 +42,10 @@ function MovieDetail() {
   const crewInfo = movieCastQuery.isSuccess ? movieCastQuery.data.crew : [];
   const castInfo = movieCastQuery.isSuccess ? movieCastQuery.data.cast : [];
   const movieImages = movieImagesQuery.isSuccess ? movieImagesQuery.data : [];
-  // console.log("image",movieImages)
+  const similarMovies = similarMovieQuery.isSuccess
+    ? similarMovieQuery.data.results.slice(0, 4)
+    : [];
+  console.log("similar", similarMovies);
 
   const movieInfo = movieDetailQuery.isSuccess ? movieDetailQuery.data : [];
 
@@ -109,12 +117,7 @@ function MovieDetail() {
       ) : (
         <div className="movie-show-page">
           {movieDetailQuery.isLoading ? <p>Loading...</p> : null}
-          <Image
-            src={bannerImage}
-            width={1920}
-            height={780}
-            alt="banner image"
-          />
+          <img src={bannerImage} className="banner-img"/>
           <div className="movie-detail">
             <div className="sub-info">
               <div className="sub-info-left">
@@ -272,13 +275,38 @@ function MovieDetail() {
           <div className="full-credit">
             <span
               onClick={() => {
-                router.push({pathname:`/movies/full-credits`,
-                query:{"id":id}
-              });
+                router.push({
+                  pathname: `/movies/full-credits`,
+                  query: { id: id },
+                });
               }}
             >
               See Full Credits
             </span>
+          </div>
+          <div className="tagline">
+            <h1>{movieInfo.tagline}</h1>
+          </div>
+
+          <div className="movie-similar">
+            <h1>More Like This</h1>
+            <div className="similar-movies-wrapper">
+              {similarMovies.map((item) => {
+                return (
+                  <div
+                    className="similar"
+                    onClick={() => router.push(`/movies/${item.id}`)}
+                  >
+                    <Image
+                      src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
+                      height={500}
+                      width={300}
+                    />
+                    {/* <span>{item.original_title}</span> */}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       )}

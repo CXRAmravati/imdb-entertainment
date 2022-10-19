@@ -56,3 +56,6 @@ export const getMovieVideos = (id) => {
 export const getMovieImages = (id) => {
   return executeHttpRequest(`/movie/${id}/images`);
 };
+export const getSimilarMovies = (id) => {
+  return executeHttpRequest(`/movie/${id}/similar`);
+};
